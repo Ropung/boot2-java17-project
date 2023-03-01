@@ -9,9 +9,8 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: ${POSTGRES_DB_JDBC_URL:jdbc:postgresql://localhost:5432/postgres}
-    platform: postgres
-    username: ${POSTGRES_DB_USERNAME}
-    password: ${POSTGRES_DB_PASSWORD}
+    username: root
+    password: root
   jpa:
     hibernate:
       ddl-auto: validate
@@ -23,3 +22,6 @@ spring:
     enabled: true
     baseline-on-migrate: true
     locations: classpath:/db/migration # 기본값
+  sql:
+    init:
+      platform: postgres
