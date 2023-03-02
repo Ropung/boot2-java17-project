@@ -1,6 +1,6 @@
-CREATE TABLE member
+CREATE TABLE IF NOT EXISTS member
 (
-	-- serial 주면 시퀀스 NEXTVAL 자동으로 적용
+	-- serial/bigserial 타입 주면 시퀀스 NEXTVAL 자동으로 적용
 	id 				BIGSERIAL,
 	username 		VARCHAR(50) 		UNIQUE 				NOT NULL,
 	password 		VARCHAR(256) 							NOT NULL,
