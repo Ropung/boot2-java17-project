@@ -38,7 +38,7 @@ public class Member implements Serializable {
 	private Long id;
 
     @Column(length = 50, nullable = false)
-    private String username;
+    private String username; // username => username     user_name  => userName
 
     @Column(length = 50, nullable = false)
     private String password;
