@@ -4,7 +4,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ses.projectset.domain.Member;
+import com.ses.projectset.domain.PasswordHistory;
 import com.ses.projectset.repository.MemberRepository;
+import com.ses.projectset.repository.PasswordHistoryRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -13,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class DefaultMemberService implements MemberService {
     // final이 있어야 @RequiredArgsConstructor에 의해서 주입됨.
     private final MemberRepository memberRepository;
+    private final PasswordHistoryRepository historyRepository;
     private final PasswordEncoder passwordEncoder;
 
     // password: 영문, 숫자, 특수문자 모두 포함 8자 이상 최대 100글자 정도
@@ -35,13 +38,22 @@ public class DefaultMemberService implements MemberService {
         // 비밀번호 보존할 때 salt를 구분해서 따로 보존할 필요가 없음. digest 통째로 보존하면 salt도 password도 다 보존되는 상태.
         String digest = passwordEncoder.encode(rawPassword);
         // passwordEncoder.matches(rawPassword, digest);
+        
+        member.setPassword(digest);
+        Member joinMember = memberRepository.save(member);
+
+        PasswordHistory passwordHistory = PasswordHistory.builder()
+                .memberId(joinMember.getId())
+                .digest(digest)
+                .build();
 
         // Login 등 암호 비교할 때:
         // if (!passwordEncoder.matches(rawPassword, digest)) {
         //     // throw new IllegalStateException("비밀번호 불일치");
         // }
 
-        member.setPassword(digest);
-        return memberRepository.save(member);
+        historyRepository.save(passwordHistory);
+
+        return joinMember;
     }
 }
