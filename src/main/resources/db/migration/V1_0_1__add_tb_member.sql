@@ -1,7 +1,7 @@
 CREATE TABLE member
 (
 	-- serial 주면 시퀀스 NEXTVAL 자동으로 적용
-	id 				SERIAL,
+	id 				BIGSERIAL,
 	username 		VARCHAR(50) 		UNIQUE 				NOT NULL,
 	password 		VARCHAR(50) 							NOT NULL,
 	email 			VARCHAR(355) 		UNIQUE 				NOT NULL,
