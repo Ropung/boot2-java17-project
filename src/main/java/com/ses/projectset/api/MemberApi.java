@@ -1,5 +1,7 @@
 package com.ses.projectset.api;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +18,7 @@ public class MemberApi {
     private final MemberService memberService;
 
     @PostMapping("/signup")
-    public boolean signUp(@RequestBody SignUpRequestDto dto) {
+    public boolean signUp(@RequestBody @Valid SignUpRequestDto dto) {
         Member member = Member.builder()
                 .email(dto.email())
                 .username(dto.username())
