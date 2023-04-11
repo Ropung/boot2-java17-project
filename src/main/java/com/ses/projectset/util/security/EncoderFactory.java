@@ -11,6 +11,8 @@ public class EncoderFactory {
     private final BcryptEncoder bcryptEncoder;
     private final ScryptEncoder scryptEncoder;
     private final Pbkdf2Encoder pbkdf2Encoder;
+//    FIXME 인코딩 공부및 적용
+//    그.. shae56  로 진행 << 공부해야됨
     
     public enum EncoderType {
         BCRYPT,

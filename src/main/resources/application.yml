@@ -25,3 +25,6 @@ spring:
   sql:
     init:
       platform: postgres
+
+#디비 유저만들어서 yml 설정하고 jpa랑 드라이버 깔고 넵
+# jpa 기본설정 << 완성되면 공유받기로 알겠습니다 감사해용
